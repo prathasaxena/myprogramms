@@ -1,0 +1,92 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package filesystem;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ *
+ * @author Shashank_Saxena
+ */
+public class phoneNo {
+    private static String line;
+    private static String direcPath;
+    public static void search(String direcPath) throws FileNotFoundException, IOException
+    {
+     BufferedReader reader=new BufferedReader(new FileReader(direcPath));
+            while ((line = reader.readLine()) != null)
+            {
+            String[] lines = line.split(" ");
+            String phoneNumber = null;
+            for (String x : lines)
+            {
+             boolean z = false;
+             if (x.length() == 10) {
+             char[] c = x.toCharArray();
+             for (char i : c)
+             {
+                if (Character.isDigit(i)) 
+                {
+                    z = true;
+                } 
+                else 
+                {
+                    z = false;
+                    break;
+                }
+            }
+
+        } 
+             else
+             {
+            z = false;
+            }
+        if (z)
+        {
+            phoneNumber = x;
+            System.out.println(phoneNumber);
+        }
+            
+            }    
+        
+    }
+    }
+    public static void traverse(String directoryName) throws IOException
+    {
+    File f1= new File(directoryName);
+    if(f1.isDirectory())
+        {
+        System.out.println("Directory of dirname"+directoryName);
+        String s[]=f1.list();
+        for(int i=0;i<s.length;i++)
+        { direcPath=directoryName+"/"+s[i];
+        traverse(direcPath);
+        }
+        }
+        else
+        {
+        search(direcPath);
+        }
+    
+    
+    
+    }
+        public static void main(String[] args) throws FileNotFoundException, IOException {
+            
+        // TODO code application logic here
+           // BufferedReader reader=new BufferedReader(new FileReader());
+        String directoryName="G:\\meow";
+        traverse(directoryName);
+        
+ 
+    }
+    
+}
